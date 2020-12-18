@@ -1,6 +1,6 @@
 # homework1
 
-![Alt text](/Screenshot.png?raw=true "Title")
+![Alt text](./Screenshot.png?raw=true "Title")
 
 ## Project setup
 ```
