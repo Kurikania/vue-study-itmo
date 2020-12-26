@@ -1,38 +1,60 @@
 <template>
   <div>
-    <form class = "search_bar large">
+    <form class="search_bar large">
       <input type="text" v-model="item" placeholder="Add your image" />
       <button @click.prevent="addImage">Get</button>
     </form>
     <div class="gallery">
-      <div
-        v-for="(image, index) in images"
-        :key="index"
-        :style="{ backgroundImage: `url(&quot;${image}&quot;)` }"
-        alt=""
-        :id="index"
+      <gallery-item @deleteItem="deleteItem"
+        v-for="image in images"
+        :key="image.title"
+        :galleyImage="image.src"
+        :galleyTitle="image.title"
       />
     </div>
   </div>
 </template>
 
 <script>
+import GalleryItem from "../components/galley-item";
 export default {
+  components: { GalleryItem },
   data() {
     return {
       images: [
-        "https://cdn.sallysbakingaddiction.com/wp-content/uploads/2019/01/vanilla-cake-600x900.jpg",
-        "https://cdn.sallysbakingaddiction.com/wp-content/uploads/2019/03/sprinkle-cupcakes-with-vanilla-buttercream-600x900.jpg",
-        "https://cdn.sallysbakingaddiction.com/wp-content/uploads/2015/07/sweet-cherry-pie-almonds-600x900.jpg",
-        "https://cdn.sallysbakingaddiction.com/wp-content/uploads/2019/08/dark-chocolate-mousse-cake-600x900.jpg",
+        {
+          src:
+            "https://cdn.sallysbakingaddiction.com/wp-content/uploads/2019/01/vanilla-cake-600x900.jpg",
+          title: "Image 1",
+        },
+        {
+          src:
+            "https://cdn.sallysbakingaddiction.com/wp-content/uploads/2019/03/sprinkle-cupcakes-with-vanilla-buttercream-600x900.jpg",
+          title: "Image 2",
+        },
+        {
+          src:
+            "https://cdn.sallysbakingaddiction.com/wp-content/uploads/2015/07/sweet-cherry-pie-almonds-600x900.jpg",
+          title: "Image 3",
+        },
+        {
+          src:
+            "https://cdn.sallysbakingaddiction.com/wp-content/uploads/2019/08/dark-chocolate-mousse-cake-600x900.jpg",
+          title: "Image 4",
+        },
       ],
+      idNum: 5,
       item: "https://picsum.photos/500/500",
     };
   },
   methods: {
     addImage() {
-        this.images.push(this.item)
+      this.images.push({src:this.item, title: "Image " + this.idNum});
+      this.idNum++
     },
+    deleteItem(id) {
+      this.images = this.images.filter(a => a.title !== id)
+    }
   },
 };
 </script>
@@ -48,10 +70,11 @@ export default {
 }
 
 .gallery div {
+  position: relative;
   width: 100%;
   background-position: center;
+  background-repeat: no-repeat;
 }
-
 
 form {
   margin: 30px auto;
@@ -66,7 +89,7 @@ form {
   font-family: "Source Sans Pro", sans-serif;
   max-width: 420px;
 }
-.search_bar input[type=text] {
+.search_bar input[type="text"] {
   border: none;
   box-shadow: none;
   font-weight: 600;
@@ -76,7 +99,7 @@ form {
   margin: 0;
   overflow: hidden;
 }
-.search_bar input[type=text]:focus {
+.search_bar input[type="text"]:focus {
   outline: none;
 }
 .search_bar button {
@@ -98,12 +121,14 @@ form {
   right: 0;
   bottom: 22%;
   left: 4%;
-  background: url("https://img.icons8.com/android/24/ffffff/plus.png") no-repeat center center;
+  background: url("https://img.icons8.com/android/24/ffffff/plus.png") no-repeat
+    center center;
   background-size: contain;
 }
 
-.search_bar button:hover, .search_bar button:focus {
-  background:rgb(206, 90, 7);;
+.search_bar button:hover,
+.search_bar button:focus {
+  background: rgb(206, 90, 7);
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   cursor: pointer;
 }
@@ -111,7 +136,7 @@ form {
 .search_bar.large {
   max-width: 560px;
 }
-.search_bar.large input[type=text] {
+.search_bar.large input[type="text"] {
   font-size: 16px;
 }
 </style>
