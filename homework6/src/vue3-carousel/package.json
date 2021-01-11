@@ -1,0 +1,61 @@
+{
+  "_from": "vue3-carousel",
+  "_id": "vue3-carousel@0.1.7",
+  "_inBundle": false,
+  "_integrity": "sha512-ifUNFvJ+RsTaacVpGDWXSGXcvSgu3An8oZ5bStTWk1/9Oxx3yfhTy5/S/BENSnhnwNZUZQxVEIqyAXZET0JaKQ==",
+  "_location": "/vue3-carousel",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "vue3-carousel",
+    "name": "vue3-carousel",
+    "escapedName": "vue3-carousel",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/vue3-carousel/-/vue3-carousel-0.1.7.tgz",
+  "_shasum": "6024922c88b9c7f298492e188b72d90027f90d2c",
+  "_spec": "vue3-carousel",
+  "_where": "C:\\Users\\Ekaterina\\Documents\\Node Course Itmo\\vue\\homework6",
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Modern lightweight Vue 3 carousel component",
+  "devDependencies": {
+    "eslint": "^7.0.0",
+    "prettier": "^2.0.5",
+    "rollup": "^2.10.2",
+    "rollup-plugin-css-only": "^2.0.0",
+    "rollup-plugin-typescript2": "^0.27.1",
+    "typescript": "^3.9.2",
+    "vitepress": "^0.8.1",
+    "vue": "^3.0.2"
+  },
+  "license": "MIT",
+  "main": "dist/carousel.js",
+  "module": "dist/carousel.es.js",
+  "name": "vue3-carousel",
+  "peerDependencies": {
+    "vue": "^3.0.0-beta.13"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -cw",
+    "docs:build": "vitepress build docs",
+    "docs:deploy": "bash scripts/docs-deploy.sh",
+    "docs:dev": "vitepress dev docs",
+    "docs:serve": "vitepress serve docs"
+  },
+  "style": "dist/carousel.css",
+  "version": "0.1.7"
+}

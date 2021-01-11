@@ -1,7 +1,14 @@
 <template>
+  <div class="row  h-100 justify-content-center align-items-center">
+    <div class="col-md-6 mx-auto">
+      <div class="card rounded-0 shadow">
+        <div class="card-header">
+          <h3 class="mb-0">Зарегистрироваться</h3>
+        </div>
+        <div class="card-body">
   <form>
     <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
+      <label for="exampleInputEmail1">Ваша почта</label>
       <input
         type="email"
         class="form-control"
@@ -9,12 +16,9 @@
         aria-describedby="emailHelp"
         v-model="email"
       />
-      <!-- <small id="emailHelp" class="form-text text-muted"
-        >We'll never share your email with anyone else.</small
-      > -->
     </div>
     <div class="form-group">
-      <label for="username">Username</label>
+      <label for="username">Логин</label>
       <input
         type="text"
         v-model="name"
@@ -23,21 +27,30 @@
       />
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
+      <label for="exampleInputPassword1">Пароль</label>
       <input
         type="password"
         v-model="password"
         class="form-control"
         id="exampleInputPassword1"
       />
+      <small>не менее 6 символов</small>
     </div>
-    <button type="submit" class="btn btn-primary"  @click.prevent="signup">Submit</button>
+    <button type="button" class="btn btn-outline-dark"  @click.prevent="signup">Отправить</button>
+    <small>
+    Есть профиль? 
+              <router-link to="/signin">Войти</router-link>
+    </small>
   </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import firebase from "firebase";
-import { db } from "../firebase";
+import { db } from "../main";
 export default {
   data() {
     return {
@@ -66,6 +79,7 @@ export default {
         });
         this.$router.replace({ name: 'Home' });
       } catch (error) {
+        alert(error)
        console.log(error);
       }
     },

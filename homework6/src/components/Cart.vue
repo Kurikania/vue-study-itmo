@@ -1,51 +1,44 @@
 <template>
   <div class="cart">
-    <button type="button" class="btn btn-outline-light" @click="showModal = !showModal"><fa icon="shopping-cart" type="fas" class="classname"></fa></button>
-
+    <button type="button" class="btn btn-outline-light" @click="openModal">
+      <fa icon="shopping-cart" type="fas" class="classname"></fa> <span v-if="cart.length > 0">({{cart.length}})</span>
+    </button>
     <div v-if="showModal" class="modal-mask">
       <div class="modal-container">
         <h4>Ваш заказ</h4>
-         <div v-for="(item, index) in cart" :key="index">
-        <div>{{ item.name }}</div>
-        <div>
-          <img :src="item.image[0]" alt />
+        <div v-for="(item, index) in cart" :key="index" class = "cart-item">
+          <div>
+            <img :src="item.image" alt />
+          </div>
+          <div>{{ item.name }} {{ "$" + item.price }}
+          <div>
+            <button
+              type="button"
+               style="display: flex; align-items: center; justify-content: center"
+              class="btn btn-dark btn-circle"
+              @click="removeItem(item, index)"
+            >
+              <fa icon="times" type="fas" class="classname"></fa>
+            </button>
+             </div>
+          </div>
         </div>
-        <div>{{ "$" + item.price }}</div>
-        <div>         
-          <button type="button" class="btn btn-dark btn-circle" @click="removeItem(index, item.id)"> <fa icon="times" type="fas" class="classname"></fa> </button>
-        </div>
-      </div>
-        <p>Total {{ orderSum }}</p>
+        <hr>
+        <p>Итого: {{ orderSum }}</p>
         <div style="display: flex; justify-content: space-between">
-         <button type="button" class="btn btn-outline-dark" @click="showModal = !showModal">Закрыть корзину</button>
-         <button type="button" class="btn btn-outline-dark" @click="goToOrder">Оформить заказ</button>
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            @click="showModal = !showModal"
+          >
+            Закрыть корзину
+          </button>
+          <button type="button" v-if="cart.length > 0" class="btn btn-outline-dark" @click="goToOrder">
+            Оформить заказ
+          </button>
         </div>
       </div>
     </div>
-  <!-- <span>Total {{ orderSum }}</span>
-    <button @click="showList()" id="show">
-      {{ cartCount }}
-    </button>
-    <div id="shoppingList" v-if="cartCount">
-      <div v-for="(item, index) in cart" :key="index">
-        <div>{{ item.name }}</div>
-        <div>
-          <img :src="item.image[0]" alt />
-        </div>
-        <div>{{ "$" + item.price }}</div>
-        <div>
-          <button @click="removeItem(index, item.id)">Remove</button>
-        </div>
-      </div>
-      <div>
-        <div>
-          <button @click="showList()">Back to shopping</button>
-          <router-link :to="{ name: 'OrderForm' }"
-            ><button @click="showList()">Buy Now</button>
-          </router-link>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -70,29 +63,41 @@ export default {
     cartCount() {
       return this.cart.length;
     },
-    // cart() {
-    //   return this.$store.getters.StoreCart.map((cartitems) => {
-    //     return this.$store.getters.products.find((itemForSale) => {
-    //       return cartitems === itemForSale.id;
-    //     });
-    //   });
-    // },
     orderSum() {
       return this.$store.getters.cart.reduce((a, b) => a + (b.price || 0), 0);
     },
   },
   methods: {
     goToOrder() {
-      this.showModal = false; 
-      this.$router.replace({ name: 'OrderForm' });
-    }
-  }
+      this.showModal = false;
+      this.$router.replace({ name: "OrderForm" });
+    },
+    removeItem(item, index) {
+      let data = [item, index];
+      this.$store.dispatch("removeItem", data);
+    },
+    openModal() {
+      if (this.$store.state.user.id) {
+        this.showModal = true;
+      } else {
+        this.$router.replace({ name: "SignIn" });
+      }
+    },
+  },
 };
 </script>
 
 <style scoped>
 #app {
   padding: 1rem;
+}
+
+img {
+  height: 80px;
+}
+
+.cart-item {
+  display: flex;
 }
 
 .modal-mask {
@@ -120,7 +125,6 @@ export default {
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
-  font-family: Helvetica, Arial, sans-serif;
 }
 
 .modal-header h3 {
@@ -152,14 +156,14 @@ export default {
 }
 
 .btn-circle {
-    width: 30px;
-    height: 30px;
-    padding: 6px 0px;
-    border-radius: 15px;
-    text-align: center;
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  text-align: center;
 }
 svg {
-  height: 15px
+  height: 25px;
 }
 /* .cart-btn {
   
