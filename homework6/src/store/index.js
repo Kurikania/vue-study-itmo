@@ -111,6 +111,10 @@ export default createStore({
       state.user.cart = [];
     },
     CLEAR_CART: (state) => {
+      for(let i = 0 ; i < state.user.cart.length; i++ ) {
+        console.log(state.user.cart[i])        
+        state.user.cart[i].inStock++ 
+      }
       state.user.cart = [];
     }
   },
@@ -125,6 +129,7 @@ export default createStore({
       context.commit("REMOVE_Item", product);
     },
     clearData(context, userData) {
+      context.commit('CLEAR_CART',  userData)
       context.commit('CLEAR_DATA', userData)
     },
     clearCart(context, data) {

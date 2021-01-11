@@ -50,15 +50,7 @@
                 > </div>
               </router-link>
               <div class="card-body">
-                <h5 class="card-title">{{ product.name }}</h5>
-                <button
-                  type="button"
-                  class="btn btn-outline-success"
-                  v-if="product.inStock >= 1"
-                  @click="addToCart(product)"
-                >
-                  В корзину
-                </button>
+                <h5 class="card-title">{{ product.name }}</h5>            
                 <button
                   type="button"
                   class="btn btn-outline-dark"
