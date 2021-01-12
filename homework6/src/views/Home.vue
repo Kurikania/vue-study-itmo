@@ -31,7 +31,7 @@
         v-for="(products, index) in items"
         :key="index"
       >
-        <h4 class="m-2">{{ products.productName }}</h4>
+         <h4  @click="goTo(products.productName)" class="m-2">{{ products.productName }}</h4>
         <div class="row">
           <div
             class="col-md-4 mb-3"
@@ -98,6 +98,7 @@ export default {
 <style scoped>
 h4 {
   color: white;
+  cursor: pointer;
 }
 body {
   background-color: rgb(18, 24, 24);

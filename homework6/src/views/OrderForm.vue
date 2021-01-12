@@ -5,6 +5,7 @@
       <table class="table">
         <thead>
           <tr>
+            <th scope="col">#</th>
             <th scope="col">Изображение</th>
             <th scope="col">Название</th>
             <th scope="col">Цена</th>
@@ -14,13 +15,16 @@
         <tbody>
           <tr v-for="(item, index) in cart" :key="index">
             <td style="margin: auto">
+              {{ index + 1 }}
+            </td>
+            <td style="margin: auto">
               <img style="height: 80px" :src="item.image" alt />
             </td>
-            <td>{{ item.name }}</td>
+            <td> <router-link  :to="{name: 'productView', params: { id: item.id }}">{{ item.name }} </router-link></td>
             <td>{{ "$" + item.price }}</td>
             <td><button
               type="button"
-               style="display: flex; align-items: center; justify-content: center"
+               style="display: flex; align-items: center; justify-content: center ; padding: 1px"
               class="btn btn-dark btn-circle"
               @click="removeItem(item, index)"
             >
@@ -101,5 +105,9 @@ export default {
 }
 .table {
   width: inherit;
+}
+
+.classname {
+  height: 25px;
 }
 </style>

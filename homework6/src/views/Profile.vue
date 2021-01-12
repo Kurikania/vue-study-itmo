@@ -46,6 +46,7 @@ export default {
       const currentUser = db.collection("users").doc(authUserId);
       await currentUser
         .collection("orders")
+        .orderBy('date')
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {

@@ -1,29 +1,44 @@
 <template>
   <div class="cart">
     <button type="button" class="btn btn-outline-light" @click="openModal">
-      <fa icon="shopping-cart" type="fas" class="classname"></fa> <span v-if="cart.length > 0">({{cart.length}})</span>
+      <fa icon="shopping-cart" type="fas" class="classname"></fa>
+      <span v-if="cart.length > 0">({{ cart.length }})</span>
     </button>
     <div v-if="showModal" class="modal-mask">
       <div class="modal-container">
         <h4>Ваш заказ</h4>
-        <div v-for="(item, index) in cart" :key="index" class = "cart-item">
-          <div>
+        <div v-for="(item, index) in cart" :key="index" class="cart-item">
+          <div>{{ index + 1 }}.</div>
+          <!-- <div>
             <img :src="item.image" alt />
+          </div> -->
+          <div>
+            <router-link
+              @click="showModal = false"
+              :to="{ name: 'productView', params: { id: item.id } }"
+            >
+              {{ item.name }}
+            </router-link>
+            {{ "$" + item.price }}
           </div>
-          <div>{{ item.name }} {{ "$" + item.price }}
+          &nbsp;&nbsp;
           <div>
             <button
               type="button"
-               style="display: flex; align-items: center; justify-content: center"
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
               class="btn btn-dark btn-circle"
               @click="removeItem(item, index)"
             >
               <fa icon="times" type="fas" class="classname"></fa>
             </button>
-             </div>
           </div>
+          <hr />
         </div>
-        <hr>
+        <hr />
         <p>Итого: {{ orderSum }}</p>
         <div style="display: flex; justify-content: space-between">
           <button
@@ -33,7 +48,12 @@
           >
             Закрыть корзину
           </button>
-          <button type="button" v-if="cart.length > 0" class="btn btn-outline-dark" @click="goToOrder">
+          <button
+            type="button"
+            v-if="cart.length > 0"
+            class="btn btn-outline-dark"
+            @click="goToOrder"
+          >
             Оформить заказ
           </button>
         </div>
@@ -98,6 +118,7 @@ img {
 
 .cart-item {
   display: flex;
+  align-items: center;
 }
 
 .modal-mask {
@@ -156,14 +177,17 @@ img {
 }
 
 .btn-circle {
-  width: 30px;
-  height: 30px;
+  width: 16px;
+  height: 16px;
   padding: 6px 0px;
   border-radius: 15px;
   text-align: center;
 }
 svg {
   height: 25px;
+}
+.btn-circle svg {
+  height: 10px;
 }
 /* .cart-btn {
   
