@@ -5,7 +5,7 @@
       <router-link to="/about">Информация</router-link>
     </div>
     <transition name="fade" mode="out-in">
-      <router-view  :key="$route.path" />
+      <router-view :key="$route.path" />
     </transition>
   </div>
 </template>
@@ -20,7 +20,7 @@
 }
 
 #nav {
-  padding: 30px;
+  padding: 10px;
 }
 
 #nav a {
@@ -32,20 +32,19 @@
   color: #42b983;
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
   opacity: 0;
 }
-button { 
-    margin: 5px;   
-    background: #8360c3;
-    font-weight: bold;
-    color: white ;
-    border: none;
-    margin: 10px 5px;
-    padding: 10px; 
-  }
-
+button {
+  background: #8360c3;
+  font-weight: bold;
+  color: white;
+  border: none;
+  margin: 10px 5px;
+  padding: 10px;
+}
 </style>
