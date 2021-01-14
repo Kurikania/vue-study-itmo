@@ -10,6 +10,9 @@
       ячейку с цифрой один, затем два, и т.д. до последней ячейки с номером 100
       (нажав на которую игра заканчивается.
     </p>
+     <a href="https://github.com/Kurikania/atention-game-vue">
+                <img src="https://img.icons8.com/fluent/48/000000/github.png"/>
+            </a>
   </div>
 </template>
 

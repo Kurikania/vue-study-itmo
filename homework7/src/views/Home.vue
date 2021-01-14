@@ -19,7 +19,7 @@
         </div>
       </transition-group>
     </div>
-    <p style="color: lightgray"> <span  @click="help" >Help</span> <span @click="cheat">Cheat </span> </p>   
+    <div style="color: lightgray ; display: flex; justify-content: space-around" > <div  @click="help" >Help</div> <div @click="cheat">Cheat </div> </div>   
   </div>
 </template>
 
